@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 // src/components/Footer/index.js
 const FooterWrapper = styled.footer`
-  background-color: #00000070;
+  background: linear-gradient(to right, rgba(0, 0, 0, .7) 0%, rgba(0, 0, 0, .6) 50%,rgba(0, 0, 0, .2) 100%);
   padding: 20px;
   display: flex;
   align-items: center;
