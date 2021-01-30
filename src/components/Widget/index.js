@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Widget = styled.div`
   margin: 24px 0;
@@ -57,12 +57,12 @@ Widget.Topic = styled.a`
   margin-bottom: 8px;
   cursor: pointer;
   border-radius: ${({ theme }) => theme.borderRadius};
-  transition: .3s;
+  transition: 0.3s;
   display: block;
-  
+
   &:hover,
   &:focus {
-    opacity: .5;
+    opacity: 0.5;
   }
 `;
 

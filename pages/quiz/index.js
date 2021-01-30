@@ -1,17 +1,18 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import db from "../db.json";
+import db from "../../db.json";
 
 import { useRouter } from 'next/router'
 
-import Widget from "../src/components/Widget";
-import QuizBackground from "../src/components/QuizBackground";
+import Widget from "../../src/components/Widget";
+import QuizBackground from "../../src/components/QuizBackground";
 
-import QuizContainer from "../src/components/QuizContainer";
-import QuizLogo from "../src/components/QuizLogo";
+import QuizContainer from "../../src/components/QuizContainer";
+import QuizLogo from "../../src/components/QuizLogo";
 
-import Button from "../src/components/Button";
-import AlternativesForm from '../src/components/AlternativesForm'
+import Button from "../../src/components/Button";
+import AlternativesForm from '../../src/components/AlternativesForm'
+import BackLinkArrow from "../../src/components/BackLinkArrow";
 
 function LoadingWidget() {
   return (
@@ -60,7 +61,7 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
-        {/* <BackLinkArrow href="/" /> */}
+      <BackLinkArrow href="/" />
         <h3>{`Pergunta ${questionIndex + 1} de ${totalQuestions}`}</h3>
       </Widget.Header>
 
@@ -134,13 +135,14 @@ const screenStates = {
   LOADING: "LOADING",
   RESULT: "RESULT",
 };
-export default function QuizPage() {
+export default function QuizPage({externalQuestions, externalBg}) {
   const [screenState, setScreenState] = React.useState(screenStates.LOADING);
   const [results, setResults] = React.useState([]);
-  const totalQuestions = db.questions.length;
+  const totalQuestions = externalQuestions ? externalQuestions.length : db.questions.length;
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const questionIndex = currentQuestion;
-  const question = db.questions[questionIndex];
+  const question = externalQuestions ? externalQuestions[questionIndex] : db.questions[questionIndex];
+  const bg = externalBg ? externalBg : db.bg
 
   const router = useRouter();
   const {name} = router.query
@@ -166,7 +168,7 @@ export default function QuizPage() {
   }
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={bg}>
       <QuizContainer>
         <QuizLogo />
         {screenState === screenStates.QUIZ && (
